@@ -9,7 +9,12 @@
 PROJECT
 -------
 This project is an university assignation for software engineering exam, the idea is to made a website that can help speech therapists and patients affected by speech or phonetic disturbances, allowing them to communicate and let the patients to follow therapies provided by speech therapists.
-The project language is only Italian, due to lack of time i've not planned to handle translations.
+<br>
+<ul>
+    <li>The project language is only Italian, due to lack of time i've not planned to handle translations.</li>
+<br>
+    <li>Project tables are made through migrations.</li>
+</ul>
 
 SCREENSHOT
 ----------
