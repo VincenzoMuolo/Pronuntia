@@ -7,7 +7,6 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
 use app\models\User;
 use app\models\Caregiver;
 use app\models\Logopedista;
@@ -51,7 +50,7 @@ class SiteController extends Controller
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'fixedVerifyCode' => YII_ENV_TEST ? 'test-me' : null,
             ],
         ];
     }
@@ -61,9 +60,38 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
-    {
-        return $this->render('index');
+    public function actionIndex() {
+        $idUtenteAttivo = Yii::$app->user->id;
+
+        if($idUtenteAttivo!=null){
+            $user_id = User::findOne($idUtenteAttivo);
+            
+            $query = (new \yii\db\Query())
+                ->select(['user.id_user'])
+                ->from('user')
+                ->join('INNER JOIN', 'caregiver', 'user.id_user = caregiver.user_key')
+                ->where(['caregiver.user_key' => $user_id]);
+                $caregiver = $query->all();
+            if($caregiver!=null){
+                return $this->render('index', [
+                    'tipoUtente' => 'caregiver',
+                ]);
+            }
+            $query = (new \yii\db\Query())
+                ->select(['user.id_user'])
+                ->from('user')
+                ->join('INNER JOIN', 'logopedista', 'user.id_user = logopedista.user_key')
+                ->where(['logopedista.user_key' => $user_id]);
+                $logopedista = $query->all();
+            if($logopedista!=null){
+                return $this->render('index', [
+                    'tipoUtente' => 'logopedista',
+                ]);
+            }
+        }
+        return $this->render('index', [
+            'tipoUtente' => null,
+        ]);
     }
 
     /**
@@ -122,31 +150,13 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+    public function checkPatient(){
 
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
     }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
+    public function actionContact(){
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        return $this->render('contact');
     }
 }

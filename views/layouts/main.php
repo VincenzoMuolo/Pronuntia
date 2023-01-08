@@ -5,7 +5,6 @@
 
 use app\assets\AppAsset;
 use app\widgets\Alert;
-use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
@@ -38,20 +37,19 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         NavBar::begin([
             'brandLabel' => 'Pronuntia',
             'brandUrl' => Yii::$app->homeUrl,
+            'brandOptions' => ['style' => 'font-size:calc(1rem + 0.75vw); '],
             'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
         ]);
         echo Nav::widget([
-            'options' => ['class' => 'navbar-nav'],
+            'options' => ['class' => 'navbar-nav ','style'=>'margin-left:auto;'],
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                Yii::$app->user->isGuest ? ['label' => 'Registrati', 'url' => ['/site/register']] : '<li class="nav-item" style="display:none;">',
-                Yii::$app->user->isGuest
-                ? ['label' => 'Accedi', 'url' => ['/site/login']]
-                : '<li class="nav-item">'
+                Yii::$app->user->isGuest ? '<li class="nav-item">' : ['label' => 'Profilo', 'url' => ['/site/login']],
+                Yii::$app->user->isGuest ? ['label' => 'Registrati', 'url' => ['/site/register']] : '<li class=" nav-item" style="display:none;">',
+                Yii::$app->user->isGuest ? ['label' => 'Accedi', 'url' => ['/site/login']] : '<li class="nav-item">'
                 . Html::beginForm(['/site/logout'])
                 . Html::submitButton(
-                    'Esci (' . Yii::$app->user->identity->name . ')',
+                    'Esci',
                     ['class' => 'nav-link btn btn-link logout']
                 )
                 . Html::endForm()
@@ -74,7 +72,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <div class="row text-muted">
                 <div class="col-md-6 text-center text-md-start">&copy; Bunchcyde <?= date('Y') ?>
                 </div>
-                <div class="col-md-6 text-center text-md-end">Powered by Yii2</div>
+                <div class="col-md-6 text-center text-md-end">Powered by Yii Framework</div>
             </div>
         </div>
     </footer>

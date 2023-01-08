@@ -17,12 +17,12 @@ AppAsset::register($this);
     </head>
 <?php   $this->beginBody()?>
     <body>
-        <div class="site-register">
-            <h1>
+        <div class="site-register mt-4">
+            <h2>
                 <?= Html::encode($this->title) ?>
-            </h1>
+            </h2>
 
-            <p>Scegli se iscriverti come caregiver o come logopedista e compila i corrispondenti campi:</p>
+            <p>Compila il modulo di registrazione come caregiver o come logopedista:</p>
 
             <?php $registerForm = ActiveForm::begin([
                 'id' => 'register-form',
@@ -30,7 +30,7 @@ AppAsset::register($this);
                 'fieldConfig' => [
                     'template' => "{label}\n{input}\n{error}",
                     'labelOptions' => ['class' => 'col-lg-1 col-form-label mr-lg-3'],
-                    'inputOptions' => ['class' => 'col-lg-3 form-control'],
+                    'inputOptions' => ['class' => 'col-lg-3 form-control','style' => 'width:95%; margin-left:1em;'],
                     'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
                 ],
             ]); ?>
@@ -55,12 +55,12 @@ AppAsset::register($this);
             </div>
 
             <div class="form-group">
-                <div class="offset-lg-1 col-lg-11">
+                <div class="">
                 <?= Html::submitButton('Registrati', ['class'=> 'btn btn-primary', 'name'=> 'register-button'])?>
                 </div>
             </div>
             <?php ActiveForm::end(); ?>
-            <div class="offset-lg-1" style="color:#999;">
+            <div class="pt-2" style="color:#999;">
                 <p>Hai già un account? <a style="margin-left: 0.5rem" href="/site/login">Accedi</a> </p>
             </div>
         </div>

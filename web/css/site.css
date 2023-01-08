@@ -85,19 +85,17 @@ a.desc:after {
 }
 
 .register-button-style {
-  background-color: transparent;
-  border: 0.2rem solid rgb(151, 195, 245);
+  background-color: rgb(167, 167, 167);
+  color: #ffffff;
+  border: none;
   border-radius: 0.25rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem 0.75rem;
   cursor: pointer;
   transition: 300ms background-color ease-in-out;
 }
 .register-button-style:hover {
-  background-color: rgb(151, 195, 245);
-  color: #ffffff;
+  background-color: rgb(131, 182, 240);
 }
 .active {
   background-color: rgb(32, 92, 161);
-  border-color: rgb(32, 92, 161);
-  color: #ffffff;
 }
