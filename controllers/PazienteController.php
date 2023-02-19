@@ -68,7 +68,7 @@ class PazienteController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_paziente' => $model->id_paziente]);
+                return $this->redirect('/paziente/index');
             }
         } else {
             $model->loadDefaultValues();

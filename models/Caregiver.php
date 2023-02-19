@@ -32,7 +32,7 @@ class Caregiver extends \yii\db\ActiveRecord
         return [
             [['mobile_phone', 'user_key'], 'required'],
             [['user_key'], 'integer'],
-            [['mobile_phone'], 'string', 'max' => 255],
+            [['mobile_phone'], 'string', 'max' => 10],
             [['mobile_phone'], 'unique'],
             [['user_key'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_key' => 'id_user']],
         ];
@@ -40,9 +40,18 @@ class Caregiver extends \yii\db\ActiveRecord
 
 
     public function beforeValidate() {
-        $query = User::find()->count();
+
         if($this->isNewRecord){
-            $this->user_key= $query;
+            $query = (new \yii\db\Query)
+                ->select(['*'])
+                ->from('user')
+                ->orderBy(['id_user' => SORT_DESC])
+                ->limit(1);
+            $records = $query->all();
+            foreach ($records as $record) {
+                $id = $record['id_user'];
+            }
+            $this->user_key = $id;
         }
         return parent::beforeValidate();
     }

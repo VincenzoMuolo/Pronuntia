@@ -10,21 +10,20 @@ $this->title = $model->name;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="paziente-view mt-5">
-
-    <h1>Paziente: <?= Html::encode($this->title) ?></h1>
-
+    <a class="back-button" href="/site/index">Home</a>
+    <h2>Paziente: <?= Html::encode($this->title) ?></h2>
+    <br>
     <p>
-        <h3 class="mt-1">Operazioni</h3>
         <?= Html::a('Aggiorna', ['update', 'id_paziente' => $model->id_paziente], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Cancella', ['delete', 'id_paziente' => $model->id_paziente], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Sei sicuro di voler cancellare i dati del paziente? Questa operazione non può essere annullata.',
+                'confirm' => 'Siete sicuri di voler cancellare i dati del paziente? Questa operazione non può essere annullata.',
                 'method' => 'post',
             ],
         ]) ?>
     </p>
-    <h3 class="mt-1">Dettagli</h3>
+    <h4 class="mt-1">Dettagli</h4>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

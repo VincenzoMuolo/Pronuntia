@@ -10,24 +10,20 @@ class m221213_141806_create_table_caregiver extends Migration
     /**
      * {@inheritdoc}
      */
-    public function safeUp()
-    {
+    public function safeUp() {
         $this->createTable("caregiver", [
             "id_caregiver" => $this->primaryKey()->unsigned()->append("AUTO_INCREMENT"),
-            "mobile_phone" => $this->string()->notNull()->unique(),
+            "mobile_phone" => $this->string(10)->notNull()->unique(),
             "user_key" => $this->integer()->notNull()->unsigned()
         ]);
-        $this->createIndex("idx_caregiver", "caregiver", "user_key");
-        $this->addForeignKey("fk_caregiver", "caregiver", "user_key", "user", "id_user");
+        $this->addForeignKey("fk_caregiver", "caregiver", "user_key", "user", "id_user",'CASCADE','CASCADE');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function safeDown()
-    {
+    public function safeDown() {
         $this->dropForeignKey("fk_caregiver", "caregiver");
-        $this->dropIndex("idx_caregiver", "caregiver");
         $this->dropTable("caregiver");
     }
 

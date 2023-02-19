@@ -5,23 +5,23 @@
 /** @var string $message */
 /** @var Exception$exception */
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 $this->title = $name;
 ?>
 <div class="site-error">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2><?= Html::encode($this->title) ?></h2>
 
     <div class="alert alert-danger">
         <?= nl2br(Html::encode($message)) ?>
     </div>
 
     <p>
-        The above error occurred while the Web server was processing your request.
+        Il seguente errore si è verificato mentre il server stava processando la vostra richiesta
     </p>
     <p>
-        Please contact us if you think this is a server error. Thank you.
+        Se il problema persiste contattateci, grazie.
     </p>
 
 </div>

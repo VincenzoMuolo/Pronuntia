@@ -10,6 +10,8 @@ use app\models\LoginForm;
 use app\models\User;
 use app\models\Caregiver;
 use app\models\Logopedista;
+use app\models\Prenotazione;
+use app\models\Prenotazionesearch;
 
 class SiteController extends Controller
 {
@@ -107,6 +109,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            Yii::$app->session->setFlash('success', 'Accesso eseguito!');
             return $this->goBack();
         }
 
@@ -150,13 +153,46 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    public function checkPatient(){
-
-    }
     public function actionContact(){
         if (Yii::$app->user->isGuest) {
             return $this->goHome();
         }
         return $this->render('contact');
+    }
+
+    public function block_date(){
+        
+        $query = (new \yii\db\Query)
+            ->select(['*'])
+            ->from('appuntamento')
+            ->join('INNER JOIN', 'prenotazione', 'Appuntamento.id_date = prenotazione.date_id')
+            ->orderBy(['id_prenotazione' => SORT_DESC])
+            ->limit(1);
+            $records = $query->all();
+            foreach ($records as $record) {
+                $id=$record['id_date'];
+            }
+            $connection = Yii::$app->db;
+            $command = $connection->createCommand()
+                ->update('appuntamento', ['state' => 'occupato'], 'id_date = :id', [':id' => $id])
+                ->execute();
+    }
+
+    public function actionBook_appointment(){
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        $newPrenotazione = new Prenotazione();
+        $newPrenotazioneSearch = new PrenotazioneSearch();
+        if ($newPrenotazione->load(Yii::$app->request->post()) && $newPrenotazione->save()) {
+            Yii::$app->session->setFlash('success', 'Prenotazione effettuata!');
+            $this->block_date();
+            return $this->goHome();
+        }
+        if ($newPrenotazioneSearch->load(Yii::$app->request->post()) && $newPrenotazioneSearch->save()) {
+        }
+        return $this->render('book_appointment', [
+            'newPrenotazione' => $newPrenotazione,'newPrenotazioneSearch' => $newPrenotazioneSearch,
+        ]);
     }
 }

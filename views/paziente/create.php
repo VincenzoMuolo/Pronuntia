@@ -8,8 +8,8 @@ use yii\helpers\Html;
 $this->title = 'Registra Paziente';
 ?>
 <div class="paziente-create mt-5">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+    <a class="back-button" href="/site/index">Home</a>
+    <h2><?= Html::encode($this->title) ?></h2>
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -24,6 +24,7 @@ $this->title = 'Accesso';
             'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
         ],
     ]); ?>
+        <?= $form->errorSummary($model)?>
 
         <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
 
@@ -42,6 +43,6 @@ $this->title = 'Accesso';
     <?php ActiveForm::end(); ?>
 
     <div class="pt-2" style="color:#999;">
-    <p>Non hai ancora un account?<a style="margin-left:0.5rem" href="/site/register">Registrati</a> </p>
+        <p>Non hai ancora un account?<a style="margin-left:0.5rem" href="/site/register">Registrati</a> </p>
     </div>
 </div>

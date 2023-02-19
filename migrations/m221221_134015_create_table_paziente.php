@@ -14,14 +14,13 @@ class m221221_134015_create_table_paziente extends Migration
     {
         $this->createTable("paziente", [
             "id_paziente" => $this->primaryKey()->unsigned()->append("AUTO_INCREMENT"),
-            "name" => $this->string(255)->notNull(),
-            "surname" => $this->string(255)->notNull(),
+            "name" => $this->string(32)->notNull(),
+            "surname" => $this->string(32)->notNull(),
             "age" => $this->integer(2)->notNull(),
             "sex" => $this->string(10)->notNull(),
             "caregiver_id" => $this->integer()->notNull()->unsigned()
         ]);
-        $this->createIndex("idx_paziente", "paziente", "caregiver_id");
-        $this->addForeignKey("fk_paziente", "paziente", "caregiver_id", "caregiver", "id_caregiver");
+        $this->addForeignKey("fk_paziente", "paziente", "caregiver_id", "caregiver", "id_caregiver",'CASCADE','CASCADE');
     }
 
     /**
@@ -30,7 +29,6 @@ class m221221_134015_create_table_paziente extends Migration
     public function safeDown()
     {
         $this->dropForeignKey("fk_paziente", "paziente");
-        $this->dropIndex("idx_paziente", "paziente");
         $this->dropTable("paziente");
     }
 }

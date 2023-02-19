@@ -44,9 +44,18 @@ class Logopedista extends \yii\db\ActiveRecord
     }
 
     public function beforeValidate(){
-        $query = User::find()->count();
+
         if($this->isNewRecord){
-            $this->user_key= $query;
+            $query = (new \yii\db\Query)
+                ->select(['*'])
+                ->from('user')
+                ->orderBy(['id_user' => SORT_DESC])
+                ->limit(1);
+            $records = $query->all();
+            foreach ($records as $record) {
+                $id = $record['id_user'];
+            }
+            $this->user_key = $id;
         }
         return parent::beforeValidate();
     }

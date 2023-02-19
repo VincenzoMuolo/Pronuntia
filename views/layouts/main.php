@@ -17,6 +17,7 @@ $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, 
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -43,7 +44,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav ','style'=>'margin-left:auto;'],
             'items' => [
-                ['label' => 'Home', 'url' => ['/site/index']],
+                /* ['label' => 'Home', 'url' => ['/site/index']], */
                 Yii::$app->user->isGuest ? '<li class="nav-item">' : ['label' => 'Profilo', 'url' => ['/site/login']],
                 Yii::$app->user->isGuest ? ['label' => 'Registrati', 'url' => ['/site/register']] : '<li class=" nav-item" style="display:none;">',
                 Yii::$app->user->isGuest ? ['label' => 'Accedi', 'url' => ['/site/login']] : '<li class="nav-item">'
@@ -61,7 +62,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     </header>
 
     <main id="main" class="flex-shrink-0" role="main">
-        <div class="container">
+        <div class="container mt-2">
                 <?= Alert::widget() ?>
                 <?= $content ?>
         </div>
