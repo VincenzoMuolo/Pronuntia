@@ -33,8 +33,7 @@ use app\models\Esercizio;
 
     <?= $form->field($model, 'descr')->textArea(['maxlength' => true]) ?>
     
-    <p>Definire una durata ideale per lo svolgimento dell'esercizio in minuti</p>
-    <p>Esempio <i style="font-weight:bold; color: #444">10</i></p>
+    <p>Definire una durata ideale per lo svolgimento dell'esercizio in minuti ( Esempio <i style="font-weight:bold; color: #444">10</i> )</p>
     <?= $form->field($model, 'duration')->textInput(['maxlength' => true]) ?>
 
     <br>

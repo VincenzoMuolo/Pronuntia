@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\grid\DataColumn;
 
 /** @var yii\web\View $this */
 /** @var app\models\EsercizioSearch $searchModel */
@@ -29,8 +30,18 @@ $this->title = 'Esercizi';
             ['class' => 'yii\grid\SerialColumn'],
             'name_esercizio',
             'descr',
-            /* 'file', */
-            'file_type',
+            [
+                'class' => DataColumn::class,
+                'format' => 'raw',
+                'header' => 'Allegato',
+                'value' => function ($model) {
+                    if($model['file_type']!=null){
+                        return $model['file_type'];
+                    }else{
+                        return 'No allegato';
+                    }
+                },
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Esercizio $model, $key, $index, $column) {

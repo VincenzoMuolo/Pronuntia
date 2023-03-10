@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Paziente;
-use app\models\PazienteSearch;
+use app\models\User;
+use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PazienteController implements the CRUD actions for Paziente model.
+ * UserController implements the CRUD actions for User model.
  */
-class PazienteController extends Controller
+class UserController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,12 +32,13 @@ class PazienteController extends Controller
     }
 
     /**
-     * Lists all Paziente models.
+     * Lists all User models.
      *
      * @return string
      */
-    public function actionIndex() {
-        $searchModel = new PazienteSearch();
+    public function actionIndex()
+    {
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -47,28 +48,30 @@ class PazienteController extends Controller
     }
 
     /**
-     * Displays a single Paziente model.
-     * @param int $id_paziente Id Paziente
+     * Displays a single User model.
+     * @param int $id_user Id User
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id_paziente) {
+    public function actionView($id_user)
+    {
         return $this->render('view', [
-            'model' => $this->findModel($id_paziente),
+            'model' => $this->findModel($id_user),
         ]);
     }
 
     /**
-     * Creates a new Paziente model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate() {
-        $model = new Paziente();
+    public function actionCreate()
+    {
+        $model = new User();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_paziente' => $model->id_paziente]);
+                return $this->redirect(['view', 'id_user' => $model->id_user]);
             }
         } else {
             $model->loadDefaultValues();
@@ -80,17 +83,18 @@ class PazienteController extends Controller
     }
 
     /**
-     * Updates an existing Paziente model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id_paziente Id Paziente
+     * @param int $id_user Id User
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id_paziente) {
-        $model = $this->findModel($id_paziente);
+    public function actionUpdate($id_user)
+    {
+        $model = $this->findModel($id_user);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_paziente' => $model->id_paziente]);
+            return $this->redirect(['view', 'id_user' => $model->id_user]);
         }
 
         return $this->render('update', [
@@ -99,27 +103,29 @@ class PazienteController extends Controller
     }
 
     /**
-     * Deletes an existing Paziente model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id_paziente Id Paziente
+     * @param int $id_user Id User
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id_paziente) {
-        $this->findModel($id_paziente)->delete();
+    public function actionDelete($id_user)
+    {
+        $this->findModel($id_user)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Paziente model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id_paziente Id Paziente
-     * @return Paziente the loaded model
+     * @param int $id_user Id User
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id_paziente) {
-        if (($model = Paziente::findOne(['id_paziente' => $id_paziente])) !== null) {
+    protected function findModel($id_user)
+    {
+        if (($model = User::findOne(['id_user' => $id_user])) !== null) {
             return $model;
         }
 

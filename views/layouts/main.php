@@ -45,7 +45,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             'options' => ['class' => 'navbar-nav ','style'=>'margin-left:auto;'],
             'items' => [
                 /* ['label' => 'Home', 'url' => ['/site/index']], */
-                Yii::$app->user->isGuest ? '<li class="nav-item">' : ['label' => 'Profilo', 'url' => ['/site/login']],
+                Yii::$app->user->isGuest ? '<li class="nav-item">' : ['label' => 'Profilo', 'url' => ['/user/view?id_user='.Yii::$app->user->id]],
                 Yii::$app->user->isGuest ? ['label' => 'Registrati', 'url' => ['/site/register']] : '<li class=" nav-item" style="display:none;">',
                 Yii::$app->user->isGuest ? ['label' => 'Accedi', 'url' => ['/site/login']] : '<li class="nav-item">'
                 . Html::beginForm(['/site/logout'])
