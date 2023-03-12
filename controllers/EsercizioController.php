@@ -111,7 +111,7 @@ class EsercizioController extends Controller
             if ($file) {
                 $fileName = $file->baseName . '.' . $file->extension;
                 $fileContents = file_get_contents($file->tempName);
-                /* $model->file_type = $fileName; */
+                $model->file_type = $fileName;
                 $model->file= $fileContents;
                 Yii::$app->session->setFlash('success', $file->baseName.'   '.$file->extension);
             }

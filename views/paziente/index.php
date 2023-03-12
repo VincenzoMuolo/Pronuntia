@@ -15,7 +15,4 @@ $this->title = 'Dati paziente rimossi';
 <div class="paziente-index">
 
     <h2><?= Html::encode($this->title) ?></h2>
-    <p>
-        <?= Html::a('Torna alla homepage', ['href' => $this->goHome()]) ?>
-    </p>
 </div>

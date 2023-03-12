@@ -17,7 +17,7 @@ class m230111_140019_create_table_esercizio extends Migration
             "name_esercizio" => $this->string(64)->notNull(),
             "descr" => $this->string(1000)->notNull(),
             "duration" => $this->string(32)->notNull(),
-            "file" => $this->binary(null),
+            "file" => $this->getDb()->getSchema()->createColumnSchemaBuilder('longblob'),
             "file_type" => $this->string(64),
             "logopedista_id" => $this->integer()->notNull()->unsigned(),
             "terapia_id" => $this->integer()->notNull()->unsigned()

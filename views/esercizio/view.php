@@ -10,6 +10,8 @@ use yii\widgets\DetailView;
 ?>
 
 <div class="esercizio-view mt-5">
+<a class="back-button" style="margin-inline:0.5em" href="/site/index">Home</a>
+
 <?= Html::a('Indietro', 'javascript:history.back()', ['class' => 'back-button']); ?>
     <h2>Dettagli Esercizio</h2>
     <br>

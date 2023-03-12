@@ -18,7 +18,7 @@ class m230117_142833_create_table_feedbackesercizio extends Migration
             'result' => 'ENUM("Svolto", "Non svolto") NOT NULL',
             "evaluation" => $this->integer(1)->notNull(),
             "duration" => $this->string(32)->notNull(),
-            "file" => $this->binary(null),
+            "file" => $this->getDb()->getSchema()->createColumnSchemaBuilder('longblob'),
             "file_type" => $this->string(64),
             "esercizio_id" => $this->integer()->notNull()->unsigned()
         ]);
